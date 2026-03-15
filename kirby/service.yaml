@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: website-photo
+  namespace: websites
+  labels:
+    app: website-photo
+spec:
+  selector:
+    app: website-photo
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80

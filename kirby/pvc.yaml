@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: website-photo-data
+  namespace: websites
+  labels:
+    app: website-photo
+spec:
+  storageClassName: truenas-nfs-csi-retain
+  accessModes: [ReadWriteMany]
+  resources:
+    requests:
+      storage: 2Gi

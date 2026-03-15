@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: website-photo
+  namespace: websites
+  labels:
+    app: website-photo
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: website-photo
+  template:
+    metadata:
+      labels:
+        app: website-photo
+    spec:
+      imagePullSecrets:
+      - name: docker-login
+      containers:
+      - name: kirby
+        image: php:8.2-apache
+        command: ["/bin/sh", "-c"]
+        args:
+        - |
+          # Instalar extensiones PHP necesarias para Kirby
+          apt-get update -qq && \
+          apt-get install -y -qq libgd-dev libzip-dev unzip git curl > /dev/null 2>&1 && \
+          docker-php-ext-install gd zip > /dev/null 2>&1 && \
+          a2enmod rewrite > /dev/null 2>&1 && \
+          # Instalar Composer e instalar Kirby si no existe
+          if [ ! -f /var/www/html/index.php ]; then
+            echo "==> Installing Composer..."
+            curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+            echo "==> Installing Kirby Starterkit..."
+            composer create-project getkirby/starterkit /tmp/kirby --no-interaction --no-dev
+            cp -a /tmp/kirby/. /var/www/html/
+            echo "==> Kirby installed successfully"
+          else
+            echo "==> Kirby already installed, skipping"
+          fi && \
+          chown -R www-data:www-data /var/www/html && \
+          apache2-foreground
+        ports:
+        - containerPort: 80
+          name: http
+        envFrom:
+        - secretRef:
+            name: website-photo-secrets
+            optional: true
+        volumeMounts:
+        - name: website-photo-data
+          mountPath: /var/www/html
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 60
+          periodSeconds: 30
+      volumes:
+      - name: website-photo-data
+        persistentVolumeClaim:
+          claimName: website-photo-data
