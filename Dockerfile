@@ -2,8 +2,9 @@ FROM php:8.2-apache
 
 # Instalar extensiones PHP requeridas por Kirby
 RUN apt-get update -qq && \
-    apt-get install -y -qq libgd-dev libzip-dev unzip git curl && \
-    docker-php-ext-install gd zip && \
+    apt-get install -y -qq libgd-dev libzip-dev libjpeg62-turbo-dev libpng-dev libwebp-dev libfreetype6-dev unzip git curl && \
+    docker-php-ext-configure gd --with-jpeg --with-webp --with-freetype && \
+    docker-php-ext-install gd zip exif && \
     a2enmod rewrite && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
