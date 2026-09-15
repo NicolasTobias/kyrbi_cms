@@ -1,3 +1,13 @@
 .DS_Store
 *.swp
 *.swo
+
+# Vendor: lo instala composer desde composer.lock
+/kirby/
+/vendor/
+
+# Estado en runtime: vive en la PVC, nunca en git
+/site/accounts/
+/site/cache/
+/site/sessions/
+/content/
