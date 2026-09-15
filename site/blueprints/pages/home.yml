@@ -15,6 +15,13 @@ sections:
   content:
     type: fields
     fields:
+      featured:
+        label: Foto destacada
+        type: files
+        query: site.index.images
+        multiple: false
+        layout: cards
+        help: La imagen grande de la portada. Si la dejas vacía se usa la portada del primer proyecto.
       headline:
         type: text
         width: 1/2

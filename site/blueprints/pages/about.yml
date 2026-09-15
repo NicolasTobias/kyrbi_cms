@@ -1,5 +1,5 @@
 # Each page blueprint must have a title, the title may be different from the file name
-title: About us
+title: Sobre mí
 
 # Each page can have an icon that is shown in page listings when no preview image is available.
 icon: ☎️
@@ -26,6 +26,18 @@ tabs:
     icon: text
     label: Content
     fields:
+      portrait:
+        label: Retrato
+        type: files
+        query: page.images
+        multiple: false
+        layout: cards
+        help: La foto que acompaña al resumen en la portada.
+      excerpt:
+        label: Resumen para la portada
+        type: textarea
+        size: small
+        help: Dos o tres frases. Es lo que se lee en la home antes de entrar aquí.
       layout:
         label: Layout
         type: layout
