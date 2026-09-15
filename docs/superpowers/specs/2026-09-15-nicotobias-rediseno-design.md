@@ -68,21 +68,28 @@ Miron es de una sola página. La fotografía necesita galerías profundas. Propu
   Mapea 1:1 sobre la estructura actual `1_photography/<álbum>` → renombrado a proyectos.
 - `about.yml`: retrato, texto, contacto, redes.
 
-### Paleta «legal pad» (valores de partida, a afinar)
+### Paleta (revisada 2026-09-15: se retira el fondo de bloc)
+
+La primera versión imitaba un bloc amarillo americano: pauta azul, margen rojo, borde
+troquelado, y las fotos sobre passe-partout blanco. Se retira por petición: se conserva el
+amarillo, mucho más claro, buscando algo elegante y cálido.
 
 | Token | Valor | Uso |
 |---|---|---|
-| `--paper` | `#FBF19E` | Fondo canary del bloc |
-| `--rule` | `#A8C0D6` | Líneas horizontales |
-| `--margin` | `#E05A4F` | Línea de margen, acentos |
-| `--ink` | `#1F2933` | Texto |
-| `--ink-pen` | `#27408B` | Enlaces (boli azul) |
+| `--paper` | `#FBF6CD` | Fondo. Amarillo pálido **con croma**: si se desatura se vuelve marfil |
+| `--paper-deep` | `#F5EEBA` | Bandas y estados hover |
+| `--hairline` | `#DDD3A4` | Filetes de separación |
+| `--ink` | `#33291F` | Texto. Pardo, no negro: el negro neutro enfría el papel cálido |
+| `--ink-soft` | `#7D7060` | Texto secundario y rótulos |
 
-**Regla de uso, importante:** el amarillo va en el *chrome* (cabecera, pie, about, índice de
-proyectos). Las fotos se montan sobre superficie neutra (blanco o casi negro). Un fondo
-saturado detrás de una imagen le desplaza el balance de color al ojo y ensucia los grises.
+**Sin color de acento.** Lo único saturado de la página son las fotografías. Los enlaces se
+distinguen por subrayado fino, no por color.
 
-Tipografía: monoespaciada tipo máquina de escribir para titulares, sans limpia para texto.
+**Las fotos van sobre el papel, sin marco.** El passe-partout blanco existía para aislarlas del
+amarillo saturado; con el papel claro el problema casi desaparece y el marco solo estorba.
+
+Tipografía: EB Garamond en todos los papeles. Versalitas espaciadas para los rótulos de
+servicio (menú, pies de foto, contadores), redonda para títulos y texto.
 
 ### Build y despliegue
 

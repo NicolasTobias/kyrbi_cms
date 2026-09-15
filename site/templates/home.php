@@ -10,8 +10,9 @@ $projects = page('photography')?->children()->listed();
 $featured = $page->featured()->toFile() ?? $projects?->first()?->cover();
 ?>
 
+<section class="masthead">
 <?php if ($featured): ?>
-<section class="hero">
+<div class="hero">
   <figure class="print">
     <img src="<?= $featured->resize(1800)->url() ?>"
          alt="<?= $featured->alt()->esc() ?>"
@@ -26,19 +27,20 @@ $featured = $page->featured()->toFile() ?? $projects?->first()?->cover();
       <span><a href="<?= $parent->url() ?>"><?= $parent->title()->esc() ?></a></span>
     <?php endif ?>
   </figcaption>
-</section>
+</div>
 <?php endif ?>
 
 <?php if ($page->headline()->isNotEmpty() || $page->subheadline()->isNotEmpty()): ?>
-<section class="intro">
+<div class="intro">
   <?php if ($page->headline()->isNotEmpty()): ?>
   <h1><?= $page->headline()->esc() ?></h1>
   <?php endif ?>
   <?php if ($page->subheadline()->isNotEmpty()): ?>
   <p><?= $page->subheadline()->esc() ?></p>
   <?php endif ?>
-</section>
+</div>
 <?php endif ?>
+</section>
 
 <?php if ($projects && $projects->isNotEmpty()): ?>
 <section>
