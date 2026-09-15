@@ -5,6 +5,12 @@ on:
     branches: [main]
     paths:
       - 'Dockerfile'
+      - 'composer.json'
+      - 'composer.lock'
+      - 'index.php'
+      - '.htaccess'
+      - 'site/**'
+      - 'assets/**'
       - '.github/workflows/build-push.yaml'
   workflow_dispatch:
 
