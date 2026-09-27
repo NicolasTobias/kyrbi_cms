@@ -1,7 +1,15 @@
 # Rediseño de nicotobias.com — diseño
 
 **Fecha:** 2026-09-15
-**Estado:** BORRADOR — pendiente de aprobación. No se ha implementado nada.
+**Estado:** SUPERADO por el brief de 2026-09-27, ya implementado.
+
+> El diseño que describe este documento (papel amarillo, EB Garamond, `/about`,
+> rejilla de proyectos en la home) **no es el que hay en el repo**. El brief del
+> 2026-09-27 lo sustituye: blanco y negro puros, Newsreader, `/proyectos`,
+> `/colectivo`, `/sobre`, y una sola fotografía a pantalla completa en la home.
+> Se conserva por el **contexto verificado contra el clúster** y por los
+> **hallazgos de seguridad y operación**, que siguen pendientes: panel abierto,
+> cuentas que no persisten, contenido demo en la PVC y licencia de Kirby.
 
 ## Contexto verificado
 

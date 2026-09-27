@@ -11,6 +11,7 @@ on:
       - '.htaccess'
       - 'site/**'
       - 'assets/**'
+      - 'seed/**'
       - '.github/workflows/build-push.yaml'
   workflow_dispatch:
 

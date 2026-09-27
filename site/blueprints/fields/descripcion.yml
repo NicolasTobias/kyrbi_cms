@@ -1,0 +1,5 @@
+# Meta description de la página. Una frase, no un resumen.
+label: Descripción (meta)
+type: text
+maxlength: 160
+help: Lo que se lee en Google y al pegar el enlace. Una frase.

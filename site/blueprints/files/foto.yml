@@ -1,0 +1,26 @@
+title: Fotografía
+icon: image
+
+accept:
+  mime: image/jpeg, image/webp
+
+columns:
+  - width: 1/2
+    sections:
+      campos:
+        type: fields
+        fields:
+          alt:
+            label: Texto alternativo (español)
+            type: text
+            required: true
+            help: Qué se ve, en español. No lo dejes vacío.
+  - width: 1/2
+    sections:
+      pie:
+        type: fields
+        fields:
+          caption:
+            label: Pie de foto
+            type: text
+            help: Opcional. Si no lo hay, no se reserva espacio.

@@ -1,0 +1,23 @@
+title: Proyectos
+icon: image
+
+status:
+  draft: true
+  listed: true
+
+options:
+  changeSlug: false
+  delete: false
+
+columns:
+  - width: 2/3
+    sections:
+      proyectos:
+        extends: sections/proyectos
+        create: proyecto
+  - width: 1/3
+    sections:
+      campos:
+        type: fields
+        fields:
+          descripcion: fields/descripcion

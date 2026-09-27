@@ -1,0 +1,28 @@
+title: Notas
+icon: text
+
+status:
+  draft: true
+  listed: true
+
+options:
+  changeSlug: false
+
+columns:
+  - width: 2/3
+    sections:
+      publicadas:
+        extends: sections/notas
+        label: Publicadas
+        status: listed
+        create: nota
+  - width: 1/3
+    sections:
+      borradores:
+        extends: sections/notas
+        label: Borradores
+        status: draft
+      campos:
+        type: fields
+        fields:
+          descripcion: fields/descripcion

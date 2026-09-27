@@ -1,0 +1,5 @@
+Title: Página no encontrada
+
+----
+
+Text: Esta página no existe. Prueba en (link: proyectos text: Proyectos).

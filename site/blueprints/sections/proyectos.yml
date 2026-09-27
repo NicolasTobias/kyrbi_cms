@@ -1,0 +1,13 @@
+# Sección reutilizable con los proyectos. Se usa en site.yml y en proyectos.yml.
+type: pages
+label: Proyectos
+parent: kirby.page("proyectos")
+template: proyecto
+layout: cards
+size: small
+info: "{{ page.fotos.count }} fotos"
+empty: Todavía no hay proyectos
+image:
+  query: page.portada
+  cover: true
+  ratio: 3/2

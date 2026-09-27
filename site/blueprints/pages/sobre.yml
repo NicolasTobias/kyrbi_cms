@@ -1,0 +1,45 @@
+title: Sobre
+icon: user
+
+status:
+  draft: true
+  listed: true
+
+options:
+  changeSlug: false
+
+columns:
+  - width: 2/3
+    sections:
+      texto:
+        type: fields
+        fields:
+          bio:
+            label: Bio (máx. 60 palabras)
+            type: textarea
+            size: small
+            maxlength: 420
+            help: Lo que haces de verdad. Sin años de experiencia, sin "capturar momentos".
+  - width: 1/3
+    sections:
+      campos:
+        type: fields
+        fields:
+          retrato:
+            label: Retrato
+            type: files
+            max: 1
+            layout: cards
+            query: page.images.template('foto')
+            uploads:
+              template: foto
+            help: Opcional y pequeño. Si no lo hay, no se pone nada.
+          email:
+            label: Correo
+            type: email
+          instagram:
+            label: Instagram
+            type: text
+            before: instagram.com/
+            help: Solo el nombre de usuario.
+          descripcion: fields/descripcion

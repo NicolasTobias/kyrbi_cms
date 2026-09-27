@@ -1,0 +1,8 @@
+# Sección reutilizable con las notas.
+type: pages
+label: Notas
+parent: kirby.page("notas")
+template: nota
+sortBy: date desc
+info: "{{ page.publicada }}"
+empty: Todavía no hay notas

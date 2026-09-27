@@ -27,10 +27,68 @@ podman logs -f nicotobias-dev
 
 Solo hace falta reconstruir la imagen si tocas el `Dockerfile` o `composer.json`.
 
+## Contenido
+
+`content/` está en `.gitignore`: en producción es una PVC y la fuente de la verdad es
+el panel. Lo que sí está versionado es `seed/content/`, el contenido semilla: las cuatro
+páginas del sitio (inicio, proyectos, colectivo, sobre) con sus textos, más notas como
+borrador. No lleva ninguna foto.
+
+Para plantarlo en un `content/` local:
+
+```sh
+./scripts/sembrar.sh
+```
+
+Copia con `cp -Rn`: planta lo que falte y no pisa nada. La imagen lleva la misma semilla
+en `/var/www/html/content`, así que el initContainer del Deployment la planta en la PVC
+con las mismas semánticas.
+
+**Lo que la semilla NO hace: borrar el contenido demo del starterkit que hoy hay en la
+PVC.** Los ocho álbumes, las notas y las 62 imágenes siguen ahí hasta que se borren a
+mano:
+
+```sh
+kubectl --context arenero -n websites exec deploy/website-photo -- \
+  sh -c 'cd /var/www/html/content && ls'
+# comprobar la lista antes de borrar nada
+```
+
+## Modo mantenimiento
+
+Con `NT_MANTENIMIENTO=true` en el entorno, todo el sitio responde 503 con una página de
+una línea; el panel, `media/` y la API siguen accesibles. Un enlace roto es neutro, un
+enlace a contenido demo resta credibilidad.
+
+Se enciende desde el `env` del Deployment. En local:
+
+```sh
+podman run -d --name nicotobias-dev -p 8080:80 -e NT_MANTENIMIENTO=true ... 
+```
+
+Conviene dejarlo encendido hasta que haya fotos reales en `/proyectos`.
+
+## Thumbs e ImageMagick
+
+`thumbs.driver` es `im`, no GD: **GD descarta el perfil ICC al redimensionar**, y un sRGB
+perdido desatura las fotos en Safari. El driver `im` de Kirby solo hace `-strip` en PNG,
+así que en JPEG y WebP conserva el perfil y los metadatos IPTC. Por eso el Dockerfile
+instala `imagemagick`.
+
+La contrapartida: al conservarlo todo, también conserva el resto del EXIF (cámara, y GPS
+si la cámara lo escribe). Kirby no permite un stripping selectivo, así que **el EXIF que
+no deba publicarse hay que quitarlo al exportar**, dejando el copyright del IPTC y el
+perfil sRGB incrustado.
+
+Anchos de thumb: 600/900/1200/1500 para las fotos en columna, 900/1200/1500/2200 para la
+apertura de la home. Calidad 82. WebP con respaldo JPEG vía `<picture>`, en
+`site/snippets/figura.php`.
+
 ## Notas
 
-- `content/` está en `.gitignore`: es una copia del contenido demo que hay hoy en la
-  PVC, traída con `kubectl exec ... tar`. No es la fuente de la verdad.
 - `site/config/config.php` no fija `url`. En producción lo tapa el ConfigMap
-  `website-photo-kirby-config`, que sí la fija.
-- Nada de esto se ha desplegado. Producción sigue con la imagen anterior.
+  `website-photo-kirby-config`, que sí la fija. Si se añade `NT_MANTENIMIENTO` o cualquier
+  otra opción, revisar que el ConfigMap no la borre.
+- La web no lleva **nada** de JavaScript. Si aparece un `<script>`, algo se ha colado.
+- `/notas` existe como borrador y no está en el menú. Se publica desde el panel el día que
+  haya una primera nota.

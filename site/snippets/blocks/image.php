@@ -1,44 +1,20 @@
 <?php
+/** @var \Kirby\Cms\Block $block */
 
 /*
-  Snippets are a great way to store code snippets for reuse
-  or to keep your templates clean.
-
-  Block snippets control the HTML for individual blocks
-  in the blocks field. This image snippet overwrites
-  Kirby's default image block to add custom classes
-  and data attributes.
-
-  More about snippets:
-  https://getkirby.com/docs/guide/templates/snippets
+  El bloque de imagen dentro de una nota. Sin lightbox y sin enlace: si se
+  hace clic en una foto, no pasa nada.
 */
 
-$src = null;
-
-if ($block->location()->value() === 'web') {
-    $alt = $block->alt();
-    $src = $block->src();
-} else if ($image = $block->image()->toFile()) {
-    $alt = $block->alt()->or($image->alt());
-    $src = $image->url();
-}
-
+$foto = $block->image()->toFile();
 ?>
-<?php if ($src): ?>
-<figure>
-  <?php snippet('image', [
-    'alt'      => $alt,
-    'contain'  => $block->crop()->isFalse(),
-    'lightbox' => $block->link()->isEmpty(),
-    'href'     => $block->link()->or($src),
-    'src'      => $src,
-    'ratio'    => $block->ratio()->or('auto')
-  ]) ?>
-
-  <?php if ($block->caption()->isNotEmpty()): ?>
-  <figcaption class="img-caption">
-    <?= $block->caption() ?>
-  </figcaption>
-  <?php endif ?>
-</figure>
+<?php if ($foto): ?>
+<?php snippet('figura', [
+  'foto'  => $foto,
+  'sizes' => '(min-width: 900px) 34rem, 90vw',
+  'pie'   => false,
+]) ?>
+<?php if ($block->caption()->isNotEmpty()): ?>
+<p class="nota-fecha"><?= $block->caption() ?></p>
+<?php endif ?>
 <?php endif ?>

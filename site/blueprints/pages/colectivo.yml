@@ -1,0 +1,55 @@
+title: Colectivo
+icon: users
+
+status:
+  draft: true
+  listed: true
+
+options:
+  changeSlug: false
+
+columns:
+  - width: 2/3
+    sections:
+      texto:
+        type: fields
+        fields:
+          intro:
+            label: Qué es
+            type: textarea
+            size: medium
+            help: Un párrafo. Segunda persona y voz activa.
+          funcionamiento:
+            label: Cómo funciona
+            type: textarea
+            size: medium
+          apuntarse:
+            label: Cómo apuntarse
+            type: textarea
+            size: small
+            help: Un correo. Sin formulario.
+  - width: 1/3
+    sections:
+      quedada:
+        type: fields
+        label: Próxima quedada
+        fields:
+          fecha:
+            label: Fecha y hora
+            type: date
+            time:
+              step: 30
+            help: Vacío = no hay ninguna convocada. La página lo dice con elegancia.
+          lugar:
+            label: Barrio
+            type: text
+          punto_encuentro:
+            label: Punto de encuentro
+            type: text
+      contacto:
+        type: fields
+        fields:
+          email:
+            label: Correo
+            type: email
+          descripcion: fields/descripcion

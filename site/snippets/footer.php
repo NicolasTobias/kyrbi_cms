@@ -1,20 +1,8 @@
-  </main>
+</main>
 
-  <footer class="footer">
-    <p><?= $site->title()->esc() ?> · Fotografía</p>
-    <nav>
-      <?php foreach ($site->children()->listed() as $item): ?>
-      <a href="<?= $item->url() ?>"><?= $item->title()->esc() ?></a>
-      <?php endforeach ?>
-    </nav>
-  </footer>
-
-</div><!-- /.sheet -->
-
-  <?= js([
-    'assets/js/lightbox.js',
-    'assets/js/index.js',
-  ]) ?>
+<footer class="pie contenedor">
+  <p><?= $site->title()->or('Nico Tobias')->esc() ?> — fotografía de calle y documental<?php if ($site->email()->isNotEmpty()): ?>. <?= Html::email($site->email()->value()) ?><?php endif ?></p>
+</footer>
 
 </body>
 </html>

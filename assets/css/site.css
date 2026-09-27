@@ -1,267 +1,419 @@
-/* ===========================================================================
-   nicotobias.com
-   Papel amarillo muy claro, tinta parda, y nada saturado en la página salvo
-   las fotografías. La elegancia sale del espacio y de la medida, no de
-   adornos ni de un color de acento.
-   =========================================================================== */
+/*
+  nicotobias.com
+
+  Principio rector: la única fuente de color de la página son las fotografías.
+  La interfaz no aporta ni un tono. No hay color de acento, ni gradientes, ni
+  sombras, ni radios. Es trabajo en color y cualquier acento del tema compite
+  con las imágenes.
+
+  Una sola familia tipográfica (Newsreader, variable, con tallas ópticas) para
+  navegación, titulares, cuerpo y pies.
+*/
+
+/* ---------- Tipografía ---------- */
+
+/* latin-ext */
+@font-face {
+  font-family: "Newsreader";
+  font-style: normal;
+  font-weight: 400 500;
+  font-display: swap;
+  src: url("../fonts/newsreader-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* latin */
+@font-face {
+  font-family: "Newsreader";
+  font-style: normal;
+  font-weight: 400 500;
+  font-display: swap;
+  src: url("../fonts/newsreader-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ---------- Tokens ---------- */
 
 :root {
-  /* Papel: amarillo pálido, pero amarillo. Si pierde croma se vuelve crema
-     y la web deja de ser la tuya para ser la de cualquiera. */
-  --paper:      #fbf6cd;
-  --paper-deep: #f5eeba;  /* bandas y estados hover */
-  --hairline:   #ddd3a4;
+  --bg: #ffffff;        /* blanco puro, no crema, no hueso */
+  --ink: #000000;       /* negro puro */
+  --ink-mute: #6e6e6e;  /* pies de foto, metadatos */
+  --rule: #e2e2e2;      /* filetes, con moderación */
 
-  /* Tinta parda, no negra: el negro neutro enfría el papel cálido.
-     Es además el tono de una copia al gelatino-bromuro virada. */
-  --ink:        #33291f;
-  --ink-soft:   #7d7060;
+  --fuente: "Newsreader", Georgia, "Times New Roman", serif;
 
-  --lh:      1.7;
-  --measure: 34rem;
+  /* Escala: base 18px, ratio 1.25 */
+  --t-xl: 2.441rem;
+  --t-l: 1.563rem;
+  --t-m: 1rem;
+  --t-s: 0.8rem;
 
-  --serif: "EB Garamond", Iowan Old Style, Palatino, Georgia, serif;
+  --medida: 34rem;   /* medida máxima de texto ≈ 68 caracteres */
+  --foto-max: 1500px;
+
+  --margen: 5vw;     /* margen lateral */
+  --ritmo: 4rem;     /* aire vertical entre fotos */
 }
 
-*, *::before, *::after { box-sizing: border-box; }
-* { margin: 0; padding: 0; }
+@media (min-width: 900px) {
+  :root {
+    --margen: 4rem;
+    --ritmo: 8rem;
+  }
+}
+
+/* ---------- Base ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 html {
-  font-family: var(--serif);
-  font-size: 19px;
-  color: var(--ink);
-  background: var(--paper);
+  font-size: 112.5%; /* 1rem = 18px respetando las preferencias del navegador */
   -webkit-text-size-adjust: 100%;
 }
-body { line-height: var(--lh); background: var(--paper); }
 
-img { display: block; width: 100%; height: auto; }
-li  { list-style: none; }
-
-a { color: currentColor; text-decoration: none; }
-a:focus-visible { outline: 1px solid var(--ink); outline-offset: 4px; }
-
-/* --- Retícula -------------------------------------------------------------
-   Márgenes asimétricos: el texto cuelga de una columna estrecha a la
-   izquierda y la imagen respira a la derecha. Es la proporción de un libro
-   ilustrado, no la de una plantilla centrada. */
-
-.sheet {
-  max-width: 84rem;
-  margin: 0 auto;
-  padding: 3.5rem 3rem 6rem;
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--fuente);
+  font-size: var(--t-m);
+  font-weight: 400;
+  line-height: 1.6;
+  font-optical-sizing: auto;
+  text-rendering: optimizeLegibility;
 }
 
-/* --- Tipografía ----------------------------------------------------------- */
-
-h1, h2, h3 { font-weight: 400; line-height: 1.2; }
-
-/* Etiquetas en versalitas espaciadas: la única "voz" distinta de la página. */
-.eyebrow {
-  font-size: 0.78rem;
-  font-variant: small-caps;
-  letter-spacing: 0.22em;
-  text-transform: lowercase;
-  color: var(--ink-soft);
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-weight: 400;
+  line-height: 1.15;
+  text-wrap: balance;
 }
 
-/* Los enlaces no cambian de color. Se subrayan fino y el subrayado engorda
-   al pasar por encima: basta, y no mete un color más en la página. */
-.prose a, .about-teaser-text a, .hero-caption a {
+p {
+  margin: 0 0 1.6rem;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border: 0;
+}
+
+figure {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
   text-decoration: underline;
-  text-decoration-thickness: 0.5px;
-  text-underline-offset: 0.25em;
-  text-decoration-color: var(--ink-soft);
-  transition: text-decoration-color 180ms ease;
-}
-.prose a:hover, .about-teaser-text a:hover, .hero-caption a:hover {
-  text-decoration-color: var(--ink);
+  text-decoration-thickness: from-font;
+  text-underline-offset: 0.18em;
 }
 
-/* --- Cabecera ------------------------------------------------------------- */
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
 
-.header {
+/* ---------- Retícula ---------- */
+
+.contenedor {
+  width: 100%;
+  max-width: calc(var(--foto-max) + 2 * var(--margen));
+  margin-inline: auto;
+  padding-inline: var(--margen);
+}
+
+.texto {
+  max-width: var(--medida);
+}
+
+/* ---------- Cabecera y pie ---------- */
+
+.cabecera {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   justify-content: space-between;
-  gap: 2rem;
-  padding-bottom: 2.5rem;
-  margin-bottom: 4rem;
-  border-bottom: 1px solid var(--hairline);
+  gap: 0.5rem 2rem;
+  padding-block: 2rem;
 }
-.logo {
-  font-size: 1.3rem;
-  font-variant: small-caps;
-  letter-spacing: 0.14em;
+
+.cabecera-nombre {
+  font-size: var(--t-m);
+  text-decoration: none;
 }
-.menu { display: flex; gap: 2rem; align-items: baseline; }
-.menu a {
-  font-size: 0.82rem;
-  font-variant: small-caps;
-  letter-spacing: 0.16em;
-  color: var(--ink-soft);
-  padding-bottom: 0.2rem;
-  border-bottom: 1px solid transparent;
-  transition: color 180ms ease, border-color 180ms ease;
-}
-.menu a:hover { color: var(--ink); }
-.menu a[aria-current] { color: var(--ink); border-bottom-color: var(--ink); }
 
-/* --- Las fotos van sobre el papel, sin marco ------------------------------ */
-
-.print { background: none; padding: 0; box-shadow: none; }
-
-/* --- Portada -------------------------------------------------------------- */
-
-/* La foto manda a la izquierda y el titular la acompaña a la derecha, a la
-   altura del pie de imagen. Asimetria de libro ilustrado: nada centrado. */
-.masthead {
-  display: grid;
-  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-  gap: 4rem;
-  /* Centrado vertical: con una foto apaisada 'end' funciona, pero con una
-     vertical alta deja media pagina en blanco arriba. */
-  align-items: center;
-  margin-bottom: 6rem;
-}
-.hero .print img { max-height: 62vh; width: auto; max-width: 100%; }
-
-/* El pie de la foto de portada, en versalitas, centrado bajo la imagen. */
-.hero-caption {
+.menu {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.6rem;
-  margin-top: 1.1rem;
-  font-size: 0.78rem;
-  font-variant: small-caps;
-  letter-spacing: 0.14em;
-  color: var(--ink-soft);
+  gap: 1.25rem;
+  font-size: var(--t-s);
 }
-.hero-caption .sep { opacity: 0.5; }
 
-.prose { max-width: var(--measure); }
-.intro { padding-bottom: 0.4rem; }
-.intro h1 { font-size: 2.6rem; margin-bottom: 1.1rem; }
-.intro p  { color: var(--ink-soft); font-size: 1.05rem; }
+.menu a {
+  text-decoration: none;
+  color: var(--ink-mute);
+}
 
-/* --- Rótulos de sección --------------------------------------------------- */
+.menu a:hover,
+.menu a[aria-current="page"] {
+  color: var(--ink);
+}
 
-.section-label {
+.menu a[aria-current="page"] {
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+.pie {
+  margin-top: var(--ritmo);
+  padding-block: 2rem;
+  border-top: 1px solid var(--rule);
+  font-size: var(--t-s);
+  color: var(--ink-mute);
+}
+
+.pie a {
+  color: inherit;
+}
+
+.pie p {
+  margin: 0;
+}
+
+/* ---------- Home ---------- */
+
+/*
+  La apertura: una sola fotografía ocupando el alto de la ventana, sin
+  titular, sin nombre, sin navegación superpuesta. Ningún texto encima.
+*/
+.apertura {
+  height: 100svh;
+  width: 100%;
+}
+
+.apertura figure,
+.apertura picture {
+  display: block;
+  height: 100%;
+}
+
+.apertura img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.home-serie-titulo {
+  font-size: var(--t-l);
+  margin-bottom: var(--ritmo);
+}
+
+.home-cierre {
+  margin-top: var(--ritmo);
+  max-width: var(--medida);
+}
+
+.home-cierre p {
+  margin-bottom: 1rem;
+}
+
+/* ---------- Serie de fotos ---------- */
+
+.serie {
   display: flex;
-  align-items: center;
-  gap: 1.5rem;
+  flex-direction: column;
+  gap: var(--ritmo);
+}
+
+.figura img {
+  width: 100%;
+}
+
+/* Si no hay pie, no se reserva espacio. */
+.figura figcaption {
+  margin-top: 0.75rem;
+  max-width: var(--medida);
+  font-size: var(--t-s);
+  line-height: 1.5;
+  color: var(--ink-mute);
+}
+
+/* ---------- Índice de proyectos ---------- */
+
+.indice {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ritmo);
+}
+
+.indice-enlace {
+  display: block;
+  text-decoration: none;
+  max-width: 50%;
+}
+
+@media (max-width: 599px) {
+  .indice-enlace {
+    max-width: none;
+  }
+}
+
+.indice-titulo {
+  margin-top: 0.75rem;
+  font-size: var(--t-m);
+}
+
+.indice-cuenta {
+  font-size: var(--t-s);
+  color: var(--ink-mute);
+}
+
+/* ---------- Proyecto ---------- */
+
+.proyecto-cabeza {
+  margin-bottom: var(--ritmo);
+}
+
+.proyecto-titulo {
+  font-size: var(--t-xl);
+  font-variation-settings: "opsz" 36;
+}
+
+.proyecto-intro {
+  margin-top: 1.5rem;
+  max-width: var(--medida);
+}
+
+.prevnext {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  margin-top: var(--ritmo);
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule);
+  font-size: var(--t-s);
+}
+
+/* ---------- Páginas de texto ---------- */
+
+.pagina-titulo {
+  font-size: var(--t-xl);
+  font-variation-settings: "opsz" 36;
   margin-bottom: 2rem;
 }
-.section-label::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: var(--hairline);
+
+.seccion {
+  margin-top: 3rem;
+  max-width: var(--medida);
 }
 
-/* --- Índice de proyectos -------------------------------------------------- */
+.seccion-titulo {
+  font-size: var(--t-l);
+  margin-bottom: 1rem;
+}
 
-.home-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
-  gap: 3.5rem 2.5rem;
-  margin-bottom: 5rem;
+.retrato {
+  margin-top: 3rem;
+  max-width: 18rem;
 }
-.home-grid a { display: block; }
-.home-grid img {
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  transition: opacity 260ms ease;
+
+.dato {
+  display: block;
+  margin-bottom: 0.4rem;
 }
-.home-grid a:hover img { opacity: 0.82; }
-/* Versalitas solo en los rotulos de servicio. Si el titulo tambien las lleva,
-   todo suena igual y se pierde la jerarquia. */
-.home-grid figcaption {
-  margin-top: 0.9rem;
+
+/* Quedada del colectivo: datos estructurados, sin puntos medios. */
+.quedada {
+  margin-top: 1rem;
+}
+
+.quedada dt {
+  font-size: var(--t-s);
+  color: var(--ink-mute);
+}
+
+.quedada dd {
+  margin: 0 0 0.75rem;
+}
+
+/* ---------- Notas ---------- */
+
+.notas-lista {
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 1rem;
-  font-size: 1rem;
-}
-.home-grid .count {
-  color: var(--ink-soft);
-  font-size: 0.74rem;
-  font-variant: small-caps;
-  letter-spacing: 0.12em;
-  white-space: nowrap;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: var(--medida);
 }
 
-/* --- Sobre mí en portada -------------------------------------------------- */
-
-.about-teaser { margin-bottom: 5rem; }
-.about-teaser-body {
-  display: grid;
-  grid-template-columns: 15rem 1fr;
-  gap: 3rem;
-  align-items: start;
-}
-.about-teaser-text { max-width: var(--measure); }
-.about-teaser-text p + p { margin-top: 1.4rem; }
-
-/* --- Página de proyecto --------------------------------------------------- */
-
-.page-title, .album-head h1 { font-size: 2.2rem; margin-bottom: 1rem; }
-.album-head { max-width: var(--measure); margin-bottom: 4rem; }
-.album-text p + p { margin-top: 1.4rem; }
-.album-text { color: var(--ink-soft); }
-
-.album-gallery { columns: 2 24rem; column-gap: 2.5rem; }
-.album-gallery li { break-inside: avoid; margin-bottom: 3.5rem; }
-.album-gallery figcaption {
-  margin-top: 0.9rem;
-  font-size: 0.78rem;
-  font-variant: small-caps;
-  letter-spacing: 0.12em;
-  color: var(--ink-soft);
-}
-.album-gallery img { transition: opacity 260ms ease; }
-.album-gallery a:hover img { opacity: 0.82; }
-
-/* --- Pie ------------------------------------------------------------------ */
-
-.footer {
-  margin-top: 6rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--hairline);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 1.5rem;
-  font-size: 0.8rem;
-  font-variant: small-caps;
-  letter-spacing: 0.12em;
-  color: var(--ink-soft);
-}
-.footer nav { display: flex; gap: 1.5rem; }
-.footer a:hover { color: var(--ink); }
-
-/* --- Adaptativo ----------------------------------------------------------- */
-
-@media (max-width: 48rem) {
-  html { font-size: 18px; }
-  .sheet { padding: 2rem 1.5rem 4rem; }
-  .header { margin-bottom: 2.5rem; padding-bottom: 1.5rem; }
-  .menu { gap: 1.25rem; }
-  .intro h1 { font-size: 1.9rem; }
-  .about-teaser-body { grid-template-columns: 1fr; gap: 1.5rem; }
-  .about-teaser-body .print { max-width: 13rem; }
-  .masthead {
-    grid-template-columns: 1fr;
-    gap: 1.75rem;
-    align-items: start;
-    margin-bottom: 3rem;
-  }
-  .intro h1 { font-size: 1.9rem; }
-  .home-grid, .about-teaser { margin-bottom: 3rem; }
+.nota-fecha {
+  display: block;
+  font-size: var(--t-s);
+  color: var(--ink-mute);
 }
 
+.nota-titulo {
+  font-size: var(--t-l);
+}
+
+.nota-cuerpo {
+  margin-top: 2rem;
+  max-width: var(--medida);
+}
+
+.nota-cuerpo figure {
+  margin-block: 2rem;
+}
+
+.nota-cuerpo figcaption {
+  margin-top: 0.75rem;
+  font-size: var(--t-s);
+  color: var(--ink-mute);
+}
+
+.nota-cuerpo blockquote {
+  margin: 2rem 0;
+  padding-left: 1.25rem;
+  border-left: 1px solid var(--rule);
+}
+
+/* ---------- Movimiento ---------- */
+
+/*
+  No hay animaciones de scroll, ni fade-in, ni parallax. Esto solo neutraliza
+  cualquier transición que llegue por defecto del navegador.
+*/
 @media (prefers-reduced-motion: reduce) {
-  * { transition: none !important; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

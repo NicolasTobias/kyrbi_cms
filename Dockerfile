@@ -1,9 +1,12 @@
 FROM php:8.2-apache
 
 # Extensiones PHP que Kirby necesita para procesar imágenes
+# ImageMagick (binario `convert`) y no GD para los thumbs: GD descarta el
+# perfil ICC al redimensionar y un sRGB perdido desatura las fotos en Safari.
+# Ver site/config/config.php → thumbs.driver = 'im'.
 RUN apt-get update -qq && \
     apt-get install -y -qq libgd-dev libzip-dev libjpeg62-turbo-dev libpng-dev \
-                           libwebp-dev libfreetype6-dev unzip git curl && \
+                           libwebp-dev libfreetype6-dev imagemagick unzip git curl && \
     docker-php-ext-configure gd --with-jpeg --with-webp --with-freetype && \
     docker-php-ext-install gd zip exif && \
     a2enmod rewrite && \
@@ -21,6 +24,12 @@ RUN composer install --no-dev --no-interaction --no-progress --optimize-autoload
 COPY index.php .htaccess ./
 COPY site/ ./site/
 COPY assets/ ./assets/
+
+# Contenido semilla: las cuatro páginas del sitio con sus textos. El
+# initContainer del Deployment hace `cp -rn` de aquí a la PVC, así que planta
+# lo que falte y nunca pisa lo que Nico haya editado en el panel.
+# Ojo: esto NO borra el contenido demo que ya hay en la PVC. Ver docs/DESARROLLO.md.
+COPY seed/content/ ./content/
 
 # Cloudflare termina TLS; Kirby tiene que enterarse de que la petición era HTTPS
 RUN echo 'SetEnvIf X-Forwarded-Proto "https" HTTPS=on' > /etc/apache2/conf-enabled/force-https.conf && \
