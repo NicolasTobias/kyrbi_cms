@@ -196,6 +196,123 @@
             "time": "2025-08-20T19:15:30+00:00"
         },
         {
+            "name": "erusev/parsedown",
+            "description": "Parser for Markdown.",
+            "keywords": [
+                "parser",
+                "markdown"
+            ],
+            "homepage": "http://parsedown.org",
+            "version": "1.8.0",
+            "version_normalized": "1.8.0.0",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Emanuil Rusev",
+                    "email": "hello@erusev.com",
+                    "homepage": "http://erusev.com"
+                }
+            ],
+            "source": {
+                "url": "https://github.com/erusev/parsedown.git",
+                "type": "git",
+                "reference": "96baaad00f71ba04d76e45b4620f54d3beabd6f7"
+            },
+            "dist": {
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/96baaad00f71ba04d76e45b4620f54d3beabd6f7",
+                "type": "zip",
+                "shasum": "",
+                "reference": "96baaad00f71ba04d76e45b4620f54d3beabd6f7"
+            },
+            "type": "library",
+            "support": {
+                "issues": "https://github.com/erusev/parsedown/issues",
+                "source": "https://github.com/erusev/parsedown/tree/1.8.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/erusev",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-02-16T11:41:01+00:00",
+            "autoload": {
+                "psr-0": {
+                    "Parsedown": ""
+                }
+            },
+            "require": {
+                "php": ">=7.1",
+                "ext-mbstring": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.5|^8.5|^9.6"
+            }
+        },
+        {
+            "name": "erusev/parsedown-extra",
+            "description": "An extension of Parsedown that adds support for Markdown Extra.",
+            "keywords": [
+                "parser",
+                "markdown",
+                "parsedown",
+                "markdown extra"
+            ],
+            "homepage": "https://github.com/erusev/parsedown-extra",
+            "version": "0.9.0",
+            "version_normalized": "0.9.0.0",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Emanuil Rusev",
+                    "email": "hello@erusev.com",
+                    "homepage": "https://erusev.com"
+                }
+            ],
+            "source": {
+                "url": "https://github.com/erusev/parsedown-extra.git",
+                "type": "git",
+                "reference": "5b5b9b9d000792c7ac631aec23a6688e0b6d3dc5"
+            },
+            "dist": {
+                "url": "https://api.github.com/repos/erusev/parsedown-extra/zipball/5b5b9b9d000792c7ac631aec23a6688e0b6d3dc5",
+                "type": "zip",
+                "shasum": "",
+                "reference": "5b5b9b9d000792c7ac631aec23a6688e0b6d3dc5"
+            },
+            "type": "library",
+            "support": {
+                "issues": "https://github.com/erusev/parsedown-extra/issues",
+                "source": "https://github.com/erusev/parsedown-extra/tree/0.9.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/erusev",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-02-16T13:06:37+00:00",
+            "autoload": {
+                "psr-0": {
+                    "ParsedownExtra": ""
+                }
+            },
+            "require": {
+                "erusev/parsedown": "^1.8",
+                "ext-dom": "*",
+                "ext-libxml": "*",
+                "ext-mbstring": "*",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.5|^8.5|^9.6"
+            }
+        },
+        {
             "name": "filp/whoops",
             "version": "2.18.4",
             "source": {
@@ -268,22 +385,64 @@
         },
         {
             "name": "getkirby/cms",
-            "version": "5.3.2",
+            "description": "The Kirby core",
+            "keywords": [
+                "cms",
+                "core",
+                "kirby"
+            ],
+            "homepage": "https://getkirby.com",
+            "version": "5.6.0",
+            "version_normalized": "5.6.0.0",
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Kirby Team",
+                    "email": "support@getkirby.com",
+                    "homepage": "https://getkirby.com"
+                }
+            ],
             "source": {
-                "type": "git",
                 "url": "https://github.com/getkirby/kirby.git",
-                "reference": "bbb64db1516140fe43f54667af10a011a67cb3b5"
+                "type": "git",
+                "reference": "3647b786bfd14b99c64a3fcee8644baf88476533"
             },
             "dist": {
+                "url": "https://api.github.com/repos/getkirby/kirby/zipball/3647b786bfd14b99c64a3fcee8644baf88476533",
                 "type": "zip",
-                "url": "https://api.github.com/repos/getkirby/kirby/zipball/bbb64db1516140fe43f54667af10a011a67cb3b5",
-                "reference": "bbb64db1516140fe43f54667af10a011a67cb3b5",
-                "shasum": ""
+                "shasum": "",
+                "reference": "3647b786bfd14b99c64a3fcee8644baf88476533"
+            },
+            "type": "kirby-cms",
+            "support": {
+                "email": "support@getkirby.com",
+                "forum": "https://forum.getkirby.com",
+                "issues": "https://github.com/getkirby/kirby/issues",
+                "source": "https://github.com/getkirby/kirby"
+            },
+            "funding": [
+                {
+                    "url": "https://getkirby.com/buy",
+                    "type": "custom"
+                }
+            ],
+            "time": "2026-09-16T10:39:26+00:00",
+            "autoload": {
+                "files": [
+                    "config/setup.php",
+                    "config/helpers.php"
+                ],
+                "psr-4": {
+                    "Kirby\\": "src/"
+                },
+                "classmap": [
+                    "dependencies/"
+                ]
             },
             "require": {
-                "christian-riesen/base32": "1.6.0",
-                "claviska/simpleimage": "4.4.0",
-                "composer/semver": "3.4.4",
+                "php": "~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0",
                 "ext-ctype": "*",
                 "ext-curl": "*",
                 "ext-dom": "*",
@@ -295,18 +454,19 @@
                 "ext-mbstring": "*",
                 "ext-openssl": "*",
                 "ext-simplexml": "*",
+                "christian-riesen/base32": "1.6.0",
+                "claviska/simpleimage": "4.4.0",
+                "composer/semver": "3.4.4",
+                "erusev/parsedown": "1.8.0",
+                "erusev/parsedown-extra": "0.9.0",
                 "filp/whoops": "2.18.4",
                 "getkirby/composer-installer": "^1.2.1",
                 "laminas/laminas-escaper": "2.18.0",
                 "michelf/php-smartypants": "1.8.1",
-                "php": "~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0",
-                "phpmailer/phpmailer": "7.0.2",
-                "symfony/polyfill-intl-idn": "1.33.0",
-                "symfony/polyfill-mbstring": "1.33.0",
-                "symfony/yaml": "7.4.6"
-            },
-            "replace": {
-                "symfony/polyfill-php72": "*"
+                "phpmailer/phpmailer": "7.1.1",
+                "symfony/polyfill-intl-idn": "1.42.0",
+                "symfony/polyfill-mbstring": "1.38.2",
+                "symfony/yaml": "7.4.18"
             },
             "suggest": {
                 "ext-apcu": "Support for the Apcu cache driver",
@@ -321,50 +481,9 @@
                 "ext-zip": "Support for ZIP archive file functions",
                 "ext-zlib": "Sanitization and validation for svgz files"
             },
-            "type": "kirby-cms",
-            "autoload": {
-                "files": [
-                    "config/setup.php",
-                    "config/helpers.php"
-                ],
-                "psr-4": {
-                    "Kirby\\": "src/"
-                },
-                "classmap": [
-                    "dependencies/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "proprietary"
-            ],
-            "authors": [
-                {
-                    "name": "Kirby Team",
-                    "email": "support@getkirby.com",
-                    "homepage": "https://getkirby.com"
-                }
-            ],
-            "description": "The Kirby core",
-            "homepage": "https://getkirby.com",
-            "keywords": [
-                "cms",
-                "core",
-                "kirby"
-            ],
-            "support": {
-                "email": "support@getkirby.com",
-                "forum": "https://forum.getkirby.com",
-                "issues": "https://github.com/getkirby/kirby/issues",
-                "source": "https://github.com/getkirby/kirby"
-            },
-            "funding": [
-                {
-                    "url": "https://getkirby.com/buy",
-                    "type": "custom"
-                }
-            ],
-            "time": "2026-03-03T13:05:51+00:00"
+            "replace": {
+                "symfony/polyfill-php72": "*"
+            }
         },
         {
             "name": "getkirby/composer-installer",
@@ -591,53 +710,11 @@
         },
         {
             "name": "phpmailer/phpmailer",
-            "version": "v7.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "ebf1655bd5b99b3f97e1a3ec0a69e5f4cd7ea088"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/ebf1655bd5b99b3f97e1a3ec0a69e5f4cd7ea088",
-                "reference": "ebf1655bd5b99b3f97e1a3ec0a69e5f4cd7ea088",
-                "shasum": ""
-            },
-            "require": {
-                "ext-ctype": "*",
-                "ext-filter": "*",
-                "ext-hash": "*",
-                "php": ">=5.5.0"
-            },
-            "require-dev": {
-                "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
-                "doctrine/annotations": "^1.2.6 || ^1.13.3",
-                "php-parallel-lint/php-console-highlighter": "^1.0.0",
-                "php-parallel-lint/php-parallel-lint": "^1.3.2",
-                "phpcompatibility/php-compatibility": "^10.0.0@dev",
-                "squizlabs/php_codesniffer": "^3.13.5",
-                "yoast/phpunit-polyfills": "^1.0.4"
-            },
-            "suggest": {
-                "decomplexity/SendOauth2": "Adapter for using XOAUTH2 authentication",
-                "directorytree/imapengine": "For uploading sent messages via IMAP, see gmail example",
-                "ext-imap": "Needed to support advanced email address parsing according to RFC822",
-                "ext-mbstring": "Needed to send email in multibyte encoding charset or decode encoded addresses",
-                "ext-openssl": "Needed for secure SMTP sending and DKIM signing",
-                "greew/oauth2-azure-provider": "Needed for Microsoft Azure XOAUTH2 authentication",
-                "hayageek/oauth2-yahoo": "Needed for Yahoo XOAUTH2 authentication",
-                "league/oauth2-google": "Needed for Google XOAUTH2 authentication",
-                "psr/log": "For optional PSR-3 debug logging",
-                "symfony/polyfill-mbstring": "To support UTF-8 if the Mbstring PHP extension is not enabled (^1.2)",
-                "thenetworg/oauth2-azure": "Needed for Microsoft XOAUTH2 authentication"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "PHPMailer\\PHPMailer\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
+            "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
+            "keywords": [],
+            "homepage": "",
+            "version": "v7.1.1",
+            "version_normalized": "7.1.1.0",
             "license": [
                 "LGPL-2.1-only"
             ],
@@ -658,10 +735,21 @@
                     "name": "Brent R. Matzelle"
                 }
             ],
-            "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
+            "source": {
+                "url": "https://github.com/PHPMailer/PHPMailer.git",
+                "type": "git",
+                "reference": "1bc1716a507a65e039d4ac9d9adebbbd0d346e15"
+            },
+            "dist": {
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/1bc1716a507a65e039d4ac9d9adebbbd0d346e15",
+                "type": "zip",
+                "shasum": "",
+                "reference": "1bc1716a507a65e039d4ac9d9adebbbd0d346e15"
+            },
+            "type": "library",
             "support": {
                 "issues": "https://github.com/PHPMailer/PHPMailer/issues",
-                "source": "https://github.com/PHPMailer/PHPMailer/tree/v7.0.2"
+                "source": "https://github.com/PHPMailer/PHPMailer/tree/v7.1.1"
             },
             "funding": [
                 {
@@ -669,7 +757,40 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-01-09T18:02:33+00:00"
+            "time": "2026-05-18T08:06:14+00:00",
+            "autoload": {
+                "psr-4": {
+                    "PHPMailer\\PHPMailer\\": "src/"
+                }
+            },
+            "require": {
+                "php": ">=5.5.0",
+                "ext-ctype": "*",
+                "ext-filter": "*",
+                "ext-hash": "*"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+                "doctrine/annotations": "^1.2.6 || ^1.13.3",
+                "php-parallel-lint/php-console-highlighter": "^1.0.0",
+                "php-parallel-lint/php-parallel-lint": "^1.3.2",
+                "phpcompatibility/php-compatibility": "^10.0.0@dev",
+                "squizlabs/php_codesniffer": "^3.13.5",
+                "yoast/phpunit-polyfills": "^1.0.4"
+            },
+            "suggest": {
+                "decomplexity/SendOauth2": "Adapter for using XOAUTH2 authentication",
+                "ext-imap": "Needed to support advanced email address parsing according to RFC822",
+                "ext-mbstring": "Needed to send email in multibyte encoding charset or decode encoded addresses",
+                "ext-openssl": "Needed for secure SMTP sending and DKIM signing",
+                "greew/oauth2-azure-provider": "Needed for Microsoft Azure XOAUTH2 authentication",
+                "hayageek/oauth2-yahoo": "Needed for Yahoo XOAUTH2 authentication",
+                "league/oauth2-google": "Needed for Google XOAUTH2 authentication",
+                "psr/log": "For optional PSR-3 debug logging",
+                "symfony/polyfill-mbstring": "To support UTF-8 if the Mbstring PHP extension is not enabled (^1.2)",
+                "thenetworg/oauth2-azure": "Needed for Microsoft XOAUTH2 authentication",
+                "directorytree/imapengine": "For uploading sent messages via IMAP, see gmail example"
+            }
         },
         {
             "name": "psr/log",
@@ -873,41 +994,18 @@
         },
         {
             "name": "symfony/polyfill-intl-idn",
-            "version": "v1.33.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/polyfill-intl-idn.git",
-                "reference": "9614ac4d8061dc257ecc64cba1b140873dce8ad3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-intl-idn/zipball/9614ac4d8061dc257ecc64cba1b140873dce8ad3",
-                "reference": "9614ac4d8061dc257ecc64cba1b140873dce8ad3",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.2",
-                "symfony/polyfill-intl-normalizer": "^1.10"
-            },
-            "suggest": {
-                "ext-intl": "For best performance"
-            },
-            "type": "library",
-            "extra": {
-                "thanks": {
-                    "url": "https://github.com/symfony/polyfill",
-                    "name": "symfony/polyfill"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "bootstrap.php"
-                ],
-                "psr-4": {
-                    "Symfony\\Polyfill\\Intl\\Idn\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
+            "description": "Symfony polyfill for intl's idn_to_ascii and idn_to_utf8 functions",
+            "keywords": [
+                "intl",
+                "compatibility",
+                "portable",
+                "idn",
+                "polyfill",
+                "shim"
+            ],
+            "homepage": "https://symfony.com",
+            "version": "v1.42.0",
+            "version_normalized": "1.42.0.0",
             "license": [
                 "MIT"
             ],
@@ -925,18 +1023,20 @@
                     "homepage": "https://symfony.com/contributors"
                 }
             ],
-            "description": "Symfony polyfill for intl's idn_to_ascii and idn_to_utf8 functions",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "compatibility",
-                "idn",
-                "intl",
-                "polyfill",
-                "portable",
-                "shim"
-            ],
+            "source": {
+                "url": "https://github.com/symfony/polyfill-intl-idn.git",
+                "type": "git",
+                "reference": "51b5ff5ba85452b31ec6f55490b08148612339d9"
+            },
+            "dist": {
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-idn/zipball/51b5ff5ba85452b31ec6f55490b08148612339d9",
+                "type": "zip",
+                "shasum": "",
+                "reference": "51b5ff5ba85452b31ec6f55490b08148612339d9"
+            },
+            "type": "library",
             "support": {
-                "source": "https://github.com/symfony/polyfill-intl-idn/tree/v1.33.0"
+                "source": "https://github.com/symfony/polyfill-intl-idn/tree/v1.42.0"
             },
             "funding": [
                 {
@@ -956,7 +1056,28 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-09-10T14:38:51+00:00"
+            "time": "2026-08-24T10:51:20+00:00",
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Intl\\Idn\\": ""
+                }
+            },
+            "extra": {
+                "thanks": {
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
+                }
+            },
+            "require": {
+                "php": ">=7.2",
+                "symfony/polyfill-intl-normalizer": "^1.10"
+            },
+            "suggest": {
+                "ext-intl": "For best performance"
+            }
         },
         {
             "name": "symfony/polyfill-intl-normalizer",
@@ -1045,44 +1166,17 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.33.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "6d857f4d76bd4b343eac26d6b539585d2bc56493"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/6d857f4d76bd4b343eac26d6b539585d2bc56493",
-                "reference": "6d857f4d76bd4b343eac26d6b539585d2bc56493",
-                "shasum": ""
-            },
-            "require": {
-                "ext-iconv": "*",
-                "php": ">=7.2"
-            },
-            "provide": {
-                "ext-mbstring": "*"
-            },
-            "suggest": {
-                "ext-mbstring": "For best performance"
-            },
-            "type": "library",
-            "extra": {
-                "thanks": {
-                    "url": "https://github.com/symfony/polyfill",
-                    "name": "symfony/polyfill"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "bootstrap.php"
-                ],
-                "psr-4": {
-                    "Symfony\\Polyfill\\Mbstring\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
+            "description": "Symfony polyfill for the Mbstring extension",
+            "keywords": [
+                "mbstring",
+                "compatibility",
+                "portable",
+                "polyfill",
+                "shim"
+            ],
+            "homepage": "https://symfony.com",
+            "version": "v1.38.2",
+            "version_normalized": "1.38.2.0",
             "license": [
                 "MIT"
             ],
@@ -1096,17 +1190,20 @@
                     "homepage": "https://symfony.com/contributors"
                 }
             ],
-            "description": "Symfony polyfill for the Mbstring extension",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "compatibility",
-                "mbstring",
-                "polyfill",
-                "portable",
-                "shim"
-            ],
+            "source": {
+                "url": "https://github.com/symfony/polyfill-mbstring.git",
+                "type": "git",
+                "reference": "d3d318bad5e7a1bfbd026009c8bfb8d8f99ae6b6"
+            },
+            "dist": {
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/d3d318bad5e7a1bfbd026009c8bfb8d8f99ae6b6",
+                "type": "zip",
+                "shasum": "",
+                "reference": "d3d318bad5e7a1bfbd026009c8bfb8d8f99ae6b6"
+            },
+            "type": "library",
             "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.33.0"
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.38.2"
             },
             "funding": [
                 {
@@ -1126,46 +1223,39 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-12-23T08:48:59+00:00"
+            "time": "2026-05-27T06:59:30+00:00",
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Mbstring\\": ""
+                }
+            },
+            "extra": {
+                "thanks": {
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
+                }
+            },
+            "require": {
+                "php": ">=7.2",
+                "ext-iconv": "*"
+            },
+            "suggest": {
+                "ext-mbstring": "For best performance"
+            },
+            "provide": {
+                "ext-mbstring": "*"
+            }
         },
         {
             "name": "symfony/yaml",
-            "version": "v7.4.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/yaml.git",
-                "reference": "58751048de17bae71c5aa0d13cb19d79bca26391"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/58751048de17bae71c5aa0d13cb19d79bca26391",
-                "reference": "58751048de17bae71c5aa0d13cb19d79bca26391",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.2",
-                "symfony/deprecation-contracts": "^2.5|^3",
-                "symfony/polyfill-ctype": "^1.8"
-            },
-            "conflict": {
-                "symfony/console": "<6.4"
-            },
-            "require-dev": {
-                "symfony/console": "^6.4|^7.0|^8.0"
-            },
-            "bin": [
-                "Resources/bin/yaml-lint"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\Yaml\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
+            "description": "Loads and dumps YAML files",
+            "keywords": [],
+            "homepage": "https://symfony.com",
+            "version": "v7.4.18",
+            "version_normalized": "7.4.18.0",
             "license": [
                 "MIT"
             ],
@@ -1179,10 +1269,20 @@
                     "homepage": "https://symfony.com/contributors"
                 }
             ],
-            "description": "Loads and dumps YAML files",
-            "homepage": "https://symfony.com",
+            "source": {
+                "url": "https://github.com/symfony/yaml.git",
+                "type": "git",
+                "reference": "4cef939e55b8a21c5780418de0d98ab00d0736e1"
+            },
+            "dist": {
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/4cef939e55b8a21c5780418de0d98ab00d0736e1",
+                "type": "zip",
+                "shasum": "",
+                "reference": "4cef939e55b8a21c5780418de0d98ab00d0736e1"
+            },
+            "type": "library",
             "support": {
-                "source": "https://github.com/symfony/yaml/tree/v7.4.6"
+                "source": "https://github.com/symfony/yaml/tree/v7.4.18"
             },
             "funding": [
                 {
@@ -1202,7 +1302,29 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-02-09T09:33:46+00:00"
+            "time": "2026-08-30T00:47:26+00:00",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Yaml\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "bin": [
+                "Resources/bin/yaml-lint"
+            ],
+            "require": {
+                "php": ">=8.2",
+                "symfony/deprecation-contracts": "^2.5|^3",
+                "symfony/polyfill-ctype": "^1.8"
+            },
+            "require-dev": {
+                "symfony/console": "^6.4|^7.0|^8.0"
+            },
+            "conflict": {
+                "symfony/console": "<6.4"
+            }
         }
     ],
     "packages-dev": [],

@@ -20,6 +20,15 @@ WORKDIR /var/www/html
 COPY composer.json composer.lock ./
 RUN composer install --no-dev --no-interaction --no-progress --optimize-autoloader
 
+# Kirby no vive en vendor/: getkirby/composer-installer lo coloca en kirby/ y se
+# guia por el campo `type: kirby-cms` de su entrada en composer.lock. Un lock mal
+# construido, sin ese campo, instala sin dar error y el sitio muere en runtime
+# con "Failed to open kirby/bootstrap.php". Que reviente el build, no produccion.
+RUN if [ ! -f kirby/bootstrap.php ] || [ ! -d kirby/src/Cms ]; then \
+      echo "ERROR: Kirby no se ha instalado en kirby/. Revisa el campo type de getkirby/cms en composer.lock."; \
+      exit 1; \
+    fi
+
 # El sitio: nuestro código, versionado en este repo
 COPY index.php .htaccess ./
 COPY site/ ./site/
