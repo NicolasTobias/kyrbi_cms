@@ -43,7 +43,7 @@ $rutasMantenimiento = [
     [
         'pattern' => '(:all)',
         'action'  => function (string $path = '') {
-            foreach (['panel', 'media', 'api', 'favicon.ico'] as $excepcion) {
+            foreach (['panel', 'media', 'api', 'healthz', 'favicon.ico'] as $excepcion) {
                 if ($path === $excepcion || str_starts_with($path, $excepcion . '/')) {
                     return $this->next();
                 }
@@ -70,6 +70,16 @@ $rutasMantenimiento = [
 ];
 
 $rutas = [
+    /*
+      Salud para las probes de Kubernetes. Tiene que responder 200 también en
+      mantenimiento: si las probes apuntan a `/` y `/` devuelve 503, el pod
+      nunca pasa a Ready y la liveness lo reinicia en bucle.
+    */
+    [
+        'pattern' => 'healthz',
+        'action'  => fn () => new Kirby\Http\Response("ok\n", 'text/plain'),
+    ],
+
     /*
       La sección /photography del starterkit pasa a /proyectos. Los álbumes
       demo no tienen equivalente, así que todo el subárbol cae en el índice.
