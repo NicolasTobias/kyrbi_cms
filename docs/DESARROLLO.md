@@ -44,14 +44,15 @@ Copia con `cp -Rn`: planta lo que falte y no pisa nada. La imagen lleva la misma
 en `/var/www/html/content`, así que el initContainer del Deployment la planta en la PVC
 con las mismas semánticas.
 
-**Lo que la semilla NO hace: borrar el contenido demo del starterkit que hoy hay en la
-PVC.** Los ocho álbumes, las notas y las 62 imágenes siguen ahí hasta que se borren a
-mano:
+El contenido demo del starterkit (ocho álbumes, las notas, `3_about`, `sandbox`) se
+borró de la PVC el 2026-09-27. Ojo con una trampa del `cp -rn`: los ficheros que ya
+existían no se pisan, así que `site.txt`, `home/home.txt` y `error/error.txt` siguieron
+siendo los del demo hasta que se borraron y se reinició el pod para que el initContainer
+plantara los nuestros. Si algún día un fichero de la semilla "no llega", es esto.
 
 ```sh
 kubectl --context arenero -n websites exec deploy/website-photo -- \
-  sh -c 'cd /var/www/html/content && ls'
-# comprobar la lista antes de borrar nada
+  ls /var/www/html/content
 ```
 
 ## Modo mantenimiento
@@ -92,3 +93,7 @@ apertura de la home. Calidad 82. WebP con respaldo JPEG vía `<picture>`, en
 - La web no lleva **nada** de JavaScript. Si aparece un `<script>`, algo se ha colado.
 - `/notas` existe como borrador y no está en el menú. Se publica desde el panel el día que
   haya una primera nota.
+- Kirby se actualiza tocando `composer.lock`. Si se edita a mano (aquí no hay composer),
+  hay que expandir el formato p2 de Packagist, que viene minificado: cada versión solo
+  trae los campos que cambian. Perder `type: kirby-cms` instala Kirby en `vendor/` sin
+  dar error y tumba el sitio en runtime. El `Dockerfile` lo comprueba desde entonces.
