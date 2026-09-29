@@ -14,7 +14,8 @@ $anterior  = $n > 1 ? $n - 1 : $total;
 $siguiente = $n < $total ? $n + 1 : 1;
 $enlace    = fn (int $i) => $page->url() . ($i > 1 ? '?foto=' . $i : '');
 
-$leyenda = $foto ? ($foto->caption()->isNotEmpty() ? $foto->caption() : $foto->alt()) : null;
+/* Solo el pie de foto. El alt es para lectores de pantalla, no se enseña. */
+$leyenda = $foto?->caption();
 $precarga = $total > 1 ? $fotos->nth($siguiente - 1) : null;
 ?>
 <?php snippet('header', ['precarga' => $precarga]) ?>
