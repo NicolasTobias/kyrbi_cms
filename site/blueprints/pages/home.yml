@@ -13,12 +13,14 @@ fields:
     max: 1
     layout: cards
     query: site.find('proyectos').images
+    translate: false
     help: Ocupa el alto de la ventana, sin texto encima. Si la dejas vacía se usa la portada del proyecto destacado.
   destacado:
     label: Proyecto destacado
     type: pages
     max: 1
     query: site.find('proyectos').children
+    translate: false
     help: Su serie completa es lo que se ve al hacer scroll en la portada.
   bio_linea:
     label: Línea de bio

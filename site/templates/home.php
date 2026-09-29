@@ -1,9 +1,8 @@
 <?php
 /*
-  La home es el momento fuerte: una sola fotografía a pantalla completa y,
-  al hacer scroll, la serie completa de un proyecto destacado. No es una
-  rejilla de miniaturas: el trabajo funciona en serie y se debilita en fotos
-  sueltas.
+  La home es una sola pantalla: la foto del proyecto actual a sangre, con su
+  título y una línea de presentación. Sin rejilla ni serie debajo: el trabajo
+  se ve entrando al proyecto.
 */
 
 $proyectos = page('proyectos')?->children()->listed()->filterBy('intendedTemplate', 'proyecto');
@@ -14,39 +13,39 @@ if ($destacado === null || $destacado->intendedTemplate()->name() !== 'proyecto'
     $destacado = $proyectos?->first();
 }
 
-$apertura  = $page->portada()->toFile() ?? $destacado?->portada();
-
-$serie = $destacado?->fotos();
-
-/*
-  Si la foto de apertura pertenece a la serie destacada, no se repite:
-  verla de nuevo justo después del primer scroll parece un fallo.
-*/
-if ($serie && $apertura) {
-    $serie = $serie->filter(fn ($foto) => $foto->id() !== $apertura->id());
-}
+$apertura = $page->portada()->toFile() ?? $destacado?->portada();
+$lema     = $page->bio_linea()->or($site->descripcion());
 ?>
 <?php snippet('header', ['apertura' => $apertura]) ?>
 
-<?php if ($destacado && $serie && $serie->isNotEmpty()): ?>
-<section>
-  <h1 class="home-serie-titulo"><a href="<?= $destacado->url() ?>"><?= $destacado->title()->esc() ?></a></h1>
+<section class="hero">
+  <?php if ($apertura): ?>
+  <?php snippet('figura', [
+    'foto'      => $apertura,
+    'set'       => 'hero',
+    'sizes'     => '100vw',
+    'prioridad' => true,
+    'pie'       => false,
+  ]) ?>
+  <?php endif ?>
 
-  <div class="serie">
-    <?php foreach ($serie as $foto): ?>
-    <?php snippet('figura', ['foto' => $foto]) ?>
-    <?php endforeach ?>
+  <?php if ($destacado): ?>
+  <a class="hero-enlace" href="<?= $destacado->url() ?>" aria-label="<?= t('ui.ver_proyecto') ?>: <?= $destacado->title()->esc('attr') ?>"></a>
+  <?php endif ?>
+
+  <div class="hero-pie">
+    <div>
+      <?php if ($destacado): ?>
+      <p class="kicker"><?= t('ui.proyecto_actual') ?></p>
+      <h1 class="hero-titulo"><a href="<?= $destacado->url() ?>"><?= $destacado->title()->esc() ?></a></h1>
+      <?php else: ?>
+      <h1 class="hero-titulo"><?= $site->title()->esc() ?></h1>
+      <?php endif ?>
+    </div>
+    <?php if ($lema->isNotEmpty()): ?>
+    <p class="hero-lema"><?= $lema->esc() ?></p>
+    <?php endif ?>
   </div>
 </section>
-<?php endif ?>
-
-<div class="home-cierre">
-  <?php if ($page->bio_linea()->isNotEmpty()): ?>
-  <p><?= $page->bio_linea()->esc() ?></p>
-  <?php endif ?>
-  <?php if ($proyectos && $proyectos->count() > 1): ?>
-  <p><a href="<?= page('proyectos')->url() ?>">Ver los demás proyectos</a></p>
-  <?php endif ?>
-</div>
 
 <?php snippet('footer') ?>

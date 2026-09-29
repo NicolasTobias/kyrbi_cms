@@ -1,32 +1,53 @@
-<?php snippet('header') ?>
+<?php
+/*
+  Visor: una foto por vista, y cada foto tiene su URL (?foto=N). Funciona sin
+  JavaScript, con enlaces; el script solo añade teclado y deslizamiento.
+*/
 
-<article>
-  <header class="proyecto-cabeza">
-    <h1 class="proyecto-titulo"><?= $page->title()->esc() ?></h1>
-    <?php if ($page->intro()->isNotEmpty()): ?>
-    <div class="proyecto-intro"><?= $page->intro()->kt() ?></div>
-    <?php endif ?>
-  </header>
+$fotos = $page->fotos();
+$total = $fotos->count();
+$n     = $total > 0 ? max(1, min($total, (int) get('foto', 1))) : 0;
+$foto  = $n > 0 ? $fotos->nth($n - 1) : null;
 
-  <div class="serie">
-    <?php foreach ($page->fotos() as $foto): ?>
-    <?php snippet('figura', ['foto' => $foto]) ?>
-    <?php endforeach ?>
-  </div>
-</article>
+/* Da la vuelta: tras la última vuelve a la primera. */
+$anterior  = $n > 1 ? $n - 1 : $total;
+$siguiente = $n < $total ? $n + 1 : 1;
+$enlace    = fn (int $i) => $page->url() . ($i > 1 ? '?foto=' . $i : '');
 
-<?php $anterior = $page->prevListed(); $siguiente = $page->nextListed() ?>
-<?php if ($anterior || $siguiente): ?>
-<nav class="prevnext" aria-label="Otros proyectos">
-  <?php if ($anterior): ?>
-  <a href="<?= $anterior->url() ?>"><?= $anterior->title()->esc() ?></a>
+$leyenda = $foto ? ($foto->caption()->isNotEmpty() ? $foto->caption() : $foto->alt()) : null;
+$precarga = $total > 1 ? $fotos->nth($siguiente - 1) : null;
+?>
+<?php snippet('header', ['precarga' => $precarga]) ?>
+
+<div class="visor" data-visor>
+  <?php if ($foto): ?>
+  <?php snippet('figura', [
+    'foto'      => $foto,
+    'set'       => 'hero',
+    'sizes'     => '100vw',
+    'prioridad' => true,
+    'pie'       => false,
+  ]) ?>
   <?php else: ?>
-  <span></span>
+  <p class="visor-vacio"><?= t('ui.sin_fotos') ?></p>
   <?php endif ?>
-  <?php if ($siguiente): ?>
-  <a href="<?= $siguiente->url() ?>"><?= $siguiente->title()->esc() ?></a>
+</div>
+
+<div class="visor-barra">
+  <p>
+    <b><?= $page->title()->esc() ?></b>
+    <?php if ($leyenda && $leyenda->isNotEmpty()): ?><?= Str::ucfirst($leyenda->esc()) ?><?php endif ?>
+  </p>
+  <?php if ($total > 0): ?>
+  <div class="visor-mando">
+    <span><?= str_pad((string) $n, 2, '0', STR_PAD_LEFT) ?> / <?= str_pad((string) $total, 2, '0', STR_PAD_LEFT) ?></span>
+    <?php if ($total > 1): ?>
+    <span class="visor-flechas">
+      <a href="<?= $enlace($anterior) ?>" rel="prev" aria-label="<?= t('ui.foto_anterior') ?>" data-anterior>&larr;</a><span></span><a href="<?= $enlace($siguiente) ?>" rel="next" aria-label="<?= t('ui.foto_siguiente') ?>" data-siguiente>&rarr;</a>
+    </span>
+    <?php endif ?>
+  </div>
   <?php endif ?>
-</nav>
-<?php endif ?>
+</div>
 
 <?php snippet('footer') ?>

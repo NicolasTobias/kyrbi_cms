@@ -29,3 +29,4 @@ columns:
           email:
             label: Correo de contacto
             type: email
+            translate: false

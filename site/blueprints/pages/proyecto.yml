@@ -19,12 +19,19 @@ columns:
             maxlength: 240
             buttons: false
             help: Opcional. La mayoría de proyectos no deberían tenerla.
+          periodo:
+            label: Periodo
+            type: text
+            width: 1/2
+            translate: false
+            help: Opcional. Sale en el índice junto al número de fotos, p. ej. 2025–26.
           portada:
             label: Portada (para el índice)
             type: files
             max: 1
             layout: cards
             query: page.images.template('foto')
+            translate: false
             uploads:
               template: foto
             help: Si la dejas vacía se usa la primera foto de la serie.

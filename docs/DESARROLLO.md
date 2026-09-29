@@ -90,10 +90,34 @@ apertura de la home. Calidad 82. WebP con respaldo JPEG vía `<picture>`, en
 - `site/config/config.php` no fija `url`. En producción lo tapa el ConfigMap
   `website-photo-kirby-config`, que sí la fija. Si se añade `NT_MANTENIMIENTO` o cualquier
   otra opción, revisar que el ConfigMap no la borre.
-- La web no lleva **nada** de JavaScript. Si aparece un `<script>`, algo se ha colado.
+- El único JavaScript es `assets/js/sitio.js`, mejora progresiva: teclado y deslizamiento
+  en el visor, la foto que sigue a la fila en el índice y Escape en el menú móvil. Sin él
+  todo funciona: el visor navega con enlaces (`?foto=N`) y el menú móvil es un checkbox.
+  Cualquier otro `<script>` es que algo se ha colado.
+- Las fotos van siempre a color. No hay ningún filtro CSS sobre ellas.
 - `/notas` existe como borrador y no está en el menú. Se publica desde el panel el día que
   haya una primera nota.
 - Kirby se actualiza tocando `composer.lock`. Si se edita a mano (aquí no hay composer),
   hay que expandir el formato p2 de Packagist, que viene minificado: cada versión solo
   trae los campos que cambian. Perder `type: kirby-cms` instala Kirby en `vendor/` sin
   dar error y tumba el sitio en runtime. El `Dockerfile` lo comprueba desde entonces.
+
+## Multiidioma (ES / EN)
+
+`languages => true`. Español por defecto, sin prefijo; inglés bajo `/en`. Las cadenas de
+interfaz están en `site/languages/{es,en}.php` (`t('ui.menu')`), no en las plantillas; el
+contenido, en los `.txt` de cada idioma (`home.es.txt`, `home.en.txt`).
+
+- **Los `.txt` sin código de idioma dejan de leerse.** Kirby no avisa: la página sale vacía.
+  `scripts/migrar-idiomas.sh <dir>` renombra a `.es.txt` (incluidos los de metadatos de
+  foto) y `3_sobre` a `3_quien-soy`. Es idempotente y va en la imagen como
+  `/usr/local/bin/migrar-idiomas`: el initContainer debe ejecutarlo sobre la PVC **antes**
+  de sembrar.
+- Slugs traducidos con `Slug:` en el `.txt` del idioma: `proyectos`/`projects`,
+  `quien-soy`/`about`.
+- Si falta una traducción, Kirby enseña el texto en español. Los campos que son
+  referencias o datos (portada, retrato, correo, periodo) son `translate: false`.
+- Las rutas propias de `config.php` que deben valer en los dos idiomas llevan
+  `'language' => '*'`; sin él solo responden en español.
+- Quedadas (que sustituirá a Colectivo) **no está construida**. Colectivo sigue en la PVC
+  pero fuera del menú y del sitemap, y `/colectivo` redirige a la home.

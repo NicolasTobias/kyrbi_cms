@@ -40,6 +40,10 @@ COPY assets/ ./assets/
 # Ojo: esto NO borra el contenido demo que ya hay en la PVC. Ver docs/DESARROLLO.md.
 COPY seed/content/ ./content/
 
+# Migración a multiidioma: el initContainer la ejecuta sobre la PVC antes de sembrar.
+COPY scripts/migrar-idiomas.sh /usr/local/bin/migrar-idiomas
+RUN chmod +x /usr/local/bin/migrar-idiomas
+
 # Cloudflare termina TLS; Kirby tiene que enterarse de que la petición era HTTPS
 RUN echo 'SetEnvIf X-Forwarded-Proto "https" HTTPS=on' > /etc/apache2/conf-enabled/force-https.conf && \
     printf '%s\n' '<?php' \

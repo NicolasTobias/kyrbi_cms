@@ -9,12 +9,12 @@
 */
 
 /*
-  Anchos de thumb. 600–1500 para las fotos en columna (el ancho máximo de
-  imagen del diseño es 1500px); 2200 solo para la apertura de la home, que
-  ocupa el alto de la ventana y se ve en pantallas grandes a 2x.
+  Anchos de thumb. 600–1500 para fotos pequeñas (retrato); 800–2000 para las
+  fotos a sangre (apertura de la home, visor de proyecto e índice), que
+  ocupan la ventana entera.
 */
 $anchosFoto = [600, 900, 1200, 1500];
-$anchosHero = [900, 1200, 1500, 2200];
+$anchosHero = [800, 1200, 1500, 2000];
 
 /*
   Construye un srcset de Kirby: mismo ancho en cada entrada, un formato por
@@ -41,8 +41,9 @@ $mantenimiento = getenv('NT_MANTENIMIENTO') === 'true';
 
 $rutasMantenimiento = [
     [
-        'pattern' => '(:all)',
-        'action'  => function (string $path = '') {
+        'pattern'  => '(:all)',
+        'language' => '*',
+        'action'   => function ($language, string $path = '') {
             foreach (['panel', 'media', 'api', 'healthz', 'favicon.ico'] as $excepcion) {
                 if ($path === $excepcion || str_starts_with($path, $excepcion . '/')) {
                     return $this->next();
@@ -89,8 +90,17 @@ $rutas = [
         'action'  => fn () => go('proyectos', 301),
     ],
     [
-        'pattern' => ['about', 'about/(:all)'],
-        'action'  => fn () => go('sobre', 301),
+        'pattern' => ['about', 'about/(:all)', 'sobre', 'sobre/(:all)'],
+        'action'  => fn () => go('quien-soy', 301),
+    ],
+
+    /*
+      Colectivo está apagado (pasará a ser "Quedadas"). Mientras no exista la
+      página nueva, la URL vieja lleva a la home en vez de dar 404.
+    */
+    [
+        'pattern' => ['colectivo', 'colectivo/(:all)'],
+        'action'  => fn () => go('/', 302),
     ],
     [
         'pattern' => ['notes', 'notes/(:all)'],
@@ -119,13 +129,18 @@ $rutas = [
             $xml  = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
             $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
 
+            $apagadas = ['colectivo', 'quedadas', 'notas'];
+
             foreach (site()->index()->listed() as $pagina) {
-                if ($pagina->isErrorPage() === true) {
+                if ($pagina->isErrorPage() === true
+                    || in_array($pagina->intendedTemplate()->name(), $apagadas, true)) {
                     continue;
                 }
 
-                $xml .= '  <url><loc>' . Kirby\Toolkit\Escape::html($pagina->url()) . '</loc>'
-                      . '<lastmod>' . $pagina->modified('c') . '</lastmod></url>' . "\n";
+                foreach (kirby()->languages() as $idioma) {
+                    $xml .= '  <url><loc>' . Kirby\Toolkit\Escape::html($pagina->url($idioma->code())) . '</loc>'
+                          . '<lastmod>' . $pagina->modified('c') . '</lastmod></url>' . "\n";
+                }
             }
 
             $xml .= '</urlset>' . "\n";
@@ -136,6 +151,8 @@ $rutas = [
 ];
 
 return [
+    'languages' => true,
+
     'panel' => [
         'install' => false,
     ],

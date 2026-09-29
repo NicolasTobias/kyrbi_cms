@@ -15,10 +15,16 @@ columns:
         type: fields
         fields:
           bio:
-            label: Bio (máx. 60 palabras)
+            label: Frase de presentación
             type: textarea
             size: small
-            maxlength: 420
+            maxlength: 200
+            buttons: false
+            help: Se lee grande, justo bajo el título. Una o dos frases.
+          texto:
+            label: Texto
+            type: textarea
+            size: medium
             help: Lo que haces de verdad. Sin años de experiencia, sin "capturar momentos".
   - width: 1/3
     sections:
@@ -31,15 +37,18 @@ columns:
             max: 1
             layout: cards
             query: page.images.template('foto')
+            translate: false
             uploads:
               template: foto
-            help: Opcional y pequeño. Si no lo hay, no se pone nada.
+            help: Opcional. Si no lo hay, el texto ocupa todo el ancho.
           email:
             label: Correo
             type: email
+            translate: false
           instagram:
             label: Instagram
             type: text
+            translate: false
             before: instagram.com/
             help: Solo el nombre de usuario.
           descripcion: fields/descripcion

@@ -1,27 +1,34 @@
+<?php
+/*
+  Índice: los proyectos como filas grandes a la izquierda y, a la derecha, la
+  foto del proyecto resaltado. Por defecto el primero; con ratón, el que se
+  señala (lo cambia sitio.js). En táctil la foto no cambia.
+*/
+
+$proyectos = $page->children()->listed()->filterBy('intendedTemplate', 'proyecto');
+?>
 <?php snippet('header') ?>
 
-<h1 class="pagina-titulo"><?= $page->title()->esc() ?></h1>
-
-<?php $proyectos = $page->children()->listed()->filterBy('intendedTemplate', 'proyecto')->limit(3) ?>
-
-<?php if ($proyectos->isNotEmpty()): ?>
-<ul class="indice">
-  <?php foreach ($proyectos as $proyecto): ?>
-  <li>
-    <a class="indice-enlace" href="<?= $proyecto->url() ?>">
-      <?php if ($portada = $proyecto->portada()): ?>
-      <?php snippet('figura', [
-        'foto'  => $portada,
-        'sizes' => '(min-width: 1660px) 750px, (min-width: 600px) calc((100vw - 8rem) / 2), 90vw',
-        'pie'   => false,
-      ]) ?>
-      <?php endif ?>
-      <span class="indice-titulo"><?= $proyecto->title()->esc() ?></span>
-      <span class="indice-cuenta"><?= $proyecto->fotos()->count() ?> fotos</span>
-    </a>
-  </li>
+<div class="indice" data-indice>
+  <h1 class="indice-cabeza kicker"><?= $page->title()->esc() ?></h1>
+  <?php foreach ($proyectos->values() as $i => $proyecto): ?>
+  <?php $n = $proyecto->fotos()->count() ?>
+  <a class="fila<?= $i === 0 ? ' activa' : '' ?>" href="<?= $proyecto->url() ?>" data-fila="<?= $i ?>">
+    <span class="fila-titulo"><?= $proyecto->title()->esc() ?></span>
+    <span class="fila-meta"><?= $n ?> <?= $n === 1 ? t('ui.foto') : t('ui.fotos') ?><?php if ($proyecto->periodo()->isNotEmpty()): ?> · <?= $proyecto->periodo()->esc() ?><?php endif ?></span>
+  </a>
   <?php endforeach ?>
-</ul>
-<?php endif ?>
+</div>
+
+<div class="indice-visor" aria-hidden="true">
+  <?php foreach ($proyectos->values() as $i => $proyecto): ?>
+  <?php if ($portada = $proyecto->portada()): ?>
+  <img class="<?= $i === 0 ? 'activa' : '' ?>" data-portada="<?= $i ?>"
+       src="<?= $portada->thumb(['width' => 1500, 'format' => 'jpg'])->url() ?>"
+       srcset="<?= $portada->srcset('hero_jpeg') ?>" sizes="50vw"
+       alt="" <?= $i === 0 ? '' : 'loading="lazy"' ?>>
+  <?php endif ?>
+  <?php endforeach ?>
+</div>
 
 <?php snippet('footer') ?>
