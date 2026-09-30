@@ -306,6 +306,7 @@ a.fila:hover, .fila.activa { background: var(--texto); color: var(--bg); }
 .sobre-largo.pendiente { color: var(--gris); }
 .contacto { border-top: 2px solid var(--regla); padding-top: 16px; }
 .contacto a { font-weight: 800; }
+.contacto .dato + .dato { margin-left: 24px; }
 
 .pagina-titulo {
   font-size: clamp(52px, 7.3vw, 88px);

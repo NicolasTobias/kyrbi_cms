@@ -6,7 +6,7 @@ Slug: about
 
 ----
 
-Bio: Street and documentary photography in colour. Madrid and Cantabria.
+Bio: Street and documentary photography.
 
 ----
 
@@ -14,4 +14,4 @@ Texto: [English text to be written, not a literal translation of the Spanish.]
 
 ----
 
-Descripcion: Nico Tobias photographs the street in colour in Madrid and Cantabria. Contact.
+Descripcion: Nico Tobias, street and documentary photography. Contact and Instagram.

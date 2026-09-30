@@ -39,8 +39,15 @@ $pendiente = Str::startsWith(trim((string) $page->texto()->value()), '[');
     <div class="sobre-largo<?= $pendiente ? ' pendiente' : '' ?>"><?= $page->texto()->kt() ?></div>
     <?php endif ?>
 
-    <?php if ($page->email()->isNotEmpty()): ?>
-    <p class="contacto"><?= t('ui.contacto') ?> <?= Html::email($page->email()->value()) ?></p>
+    <?php if ($page->email()->isNotEmpty() || $page->instagram()->isNotEmpty()): ?>
+    <p class="contacto">
+      <?php if ($page->email()->isNotEmpty()): ?>
+      <span class="dato"><?= t('ui.contacto') ?> <?= Html::email($page->email()->value()) ?></span>
+      <?php endif ?>
+      <?php if ($page->instagram()->isNotEmpty()): ?>
+      <span class="dato"><a href="https://instagram.com/<?= $page->instagram()->esc('attr') ?>" rel="me">Instagram</a></span>
+      <?php endif ?>
+    </p>
     <?php endif ?>
   </div>
 </div>
