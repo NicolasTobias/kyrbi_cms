@@ -121,3 +121,23 @@ contenido, en los `.txt` de cada idioma (`home.es.txt`, `home.en.txt`).
   `'language' => '*'`; sin él solo responden en español.
 - Quedadas (que sustituirá a Colectivo) **no está construida**. Colectivo sigue en la PVC
   pero fuera del menú y del sitemap, y `/colectivo` redirige a la home.
+
+## Diseño: handoff de Claude Design
+
+El handoff vigente está en `docs/diseno/handoff-1a/` (versión del 2026-09-30: README y
+prototipo). Las versiones anteriores están en el historial de git. El prototipo carga un
+`support.js` del runtime de Claude Design que no se incluye, así que no se abre solo en el
+navegador: se lee el marcado para las medidas.
+
+Dónde la implementación se aparta del handoff, y por qué:
+
+- **Nombres de plantilla del repo** (`proyectos`, `proyecto`, `sobre`), no los del README
+  (`projects.php`, `about.php`): el contenido y los blueprints ya estaban en español.
+- **Lema y lead sin "Madrid y Cantabria" ni "en color"**, como se cambió en producción
+  desde el panel. El handoff los lleva.
+- **Instagram en el contacto de Quién soy**, junto al correo. El handoff solo lleva el correo.
+- **Quedadas no está construida** (ni el blueprint de quedada ni el `.ics`). Colectivo sigue
+  en la PVC pero fuera del menú y del sitemap, y `/colectivo` redirige a la home.
+- **El visor solo enseña el pie de foto**, nunca el `alt`. El prototipo usaba el `alt`
+  como leyenda porque no había pies.
+- **Texto EN de About pendiente**: se ve el marcador del diseño, en gris, hasta que se escriba.
