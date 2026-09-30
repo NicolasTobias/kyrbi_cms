@@ -260,25 +260,51 @@ a.fila:hover, .fila.activa { background: var(--texto); color: var(--bg); }
 
 /* --- Sobre ------------------------------------------------------------------ */
 
-.pagina-sobre main { padding: 0; display: flex; }
-.sobre { flex: 1; display: grid; grid-template-columns: 1fr; }
-.sobre.con-retrato { grid-template-columns: .8fr 1.2fr; }
-.sobre-retrato { position: relative; border-right: 2px solid var(--regla); background: var(--surface); }
-.sobre-retrato .figura, .sobre-retrato picture { position: absolute; inset: 0; }
-.sobre-retrato img { position: absolute; inset: 0; height: 100%; object-fit: cover; }
-.sobre-texto {
-  padding: var(--pad);
+.pagina-sobre main { padding: 0; display: block; }
+
+/* Rejilla con áreas: el retrato ocupa la columna entera y el resto se apila a
+   su derecha. Así en móvil se puede recolocar entre el lead y el texto. */
+.sobre {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas: "cabeza" "cuerpo";
+  align-items: start;
+}
+.sobre.con-retrato {
+  grid-template-columns: .8fr 1.2fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas: "foto cabeza" "foto cuerpo";
+}
+.sobre-cabeza { grid-area: cabeza; padding: var(--pad) var(--pad) 0; }
+.sobre-cuerpo {
+  grid-area: cuerpo;
+  padding: 32px var(--pad) 40px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 48px;
+  gap: 32px;
 }
+.sobre-retrato {
+  grid-area: foto;
+  align-self: stretch;
+  border-right: 2px solid var(--regla);
+}
+.sobre-retrato-fijo {
+  position: sticky;
+  top: 0;
+  height: 640px;
+  max-height: 100vh;
+  max-height: 100svh;
+  background: var(--surface);
+}
+.sobre-retrato-fijo .figura, .sobre-retrato-fijo picture { display: block; height: 100%; }
+.sobre-retrato-fijo img { height: 100%; object-fit: cover; }
+
 .sobre-lead { font-size: 20px; line-height: 1.5; max-width: 560px; }
-.sobre-largo { margin-top: 16px; color: var(--gris); max-width: 560px; }
-.sobre-largo p + p { margin-top: 12px; }
+.regla { border: 0; height: 2px; background: var(--regla); }
+.sobre-largo { max-width: 560px; font-size: 17px; line-height: 1.6; }
+.sobre-largo p + p { margin-top: 20px; }
+.sobre-largo.pendiente { color: var(--gris); }
 .contacto { border-top: 2px solid var(--regla); padding-top: 16px; }
-.contacto b { font-weight: 800; }
-.contacto .dato + .dato { margin-left: 24px; }
 .contacto a { font-weight: 800; }
 
 .pagina-titulo {
@@ -386,8 +412,16 @@ a.fila:hover, .fila.activa { background: var(--texto); color: var(--bg); }
   .pagina-proyectos .indice { border-right: 0; }
   .fila { padding: 20px var(--pad); }
 
-  .sobre.con-retrato { grid-template-columns: 1fr; grid-template-rows: 45vh auto; }
-  .sobre-retrato { border-right: 0; border-bottom: 2px solid var(--regla); }
+  .sobre.con-retrato {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: "cabeza" "foto" "cuerpo";
+  }
+  .sobre-cabeza { padding: 24px var(--pad) 24px; }
+  .sobre-retrato { border-right: 0; border-block: 2px solid var(--regla); }
+  .sobre-retrato-fijo { position: static; height: 45vh; max-height: none; }
+  .sobre-cuerpo { padding: 24px var(--pad) 32px; gap: 24px; }
+  .sobre-largo { font-size: 16px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
