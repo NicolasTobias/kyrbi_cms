@@ -11,16 +11,16 @@ columns:
         type: fields
         fields:
           alt:
-            label: Texto alternativo (español)
+            label: Texto alternativo
             type: text
             required: true
-            help: Qué se ve, en español. No lo dejes vacío.
+            help: Qué se ve, en el idioma que estés editando. No lo dejes vacío.
   - width: 1/2
     sections:
-      pie:
+      lugar:
         type: fields
         fields:
-          caption:
-            label: Pie de foto
+          lugar_ano:
+            label: Lugar y año
             type: text
-            help: Opcional. Si no lo hay, no se reserva espacio.
+            help: Opcional. Sale en la lista al final del proyecto, p. ej. "Segovia, 2026". Si lo dejas vacío, esa foto no sale en la lista.

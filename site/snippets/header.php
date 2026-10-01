@@ -18,7 +18,8 @@ $titulo = $page->isHomePage()
 $descripcion = $page->descripcion()->or($site->descripcion());
 
 /* Imagen social: 1200×630 recortado. Específica del proyecto si la hay. */
-$social = $page->content()->get('portada')->toFile()
+$social = $page->content()->get('social')->toFile()
+       ?? $page->content()->get('portada')->toFile()
        ?? ($apertura ?? null)
        ?? $page->images()->first()
        ?? $site->content()->get('portada')->toFile();

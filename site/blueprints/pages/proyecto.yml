@@ -35,6 +35,14 @@ columns:
             uploads:
               template: foto
             help: Si la dejas vacía se usa la primera foto de la serie.
+          social:
+            label: Imagen para compartir (og:image)
+            type: files
+            max: 1
+            layout: cards
+            query: page.images.template('foto')
+            translate: false
+            help: Opcional. Si la dejas vacía se usa la portada.
           descripcion: fields/descripcion
   - width: 2/3
     sections:

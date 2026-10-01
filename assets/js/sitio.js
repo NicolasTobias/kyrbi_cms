@@ -1,40 +1,9 @@
 /*
-  Mejora progresiva. Sin este fichero todo sigue funcionando: el visor navega
-  con enlaces (?foto=N), el índice enseña la foto del primer proyecto y el menú
+  Mejora progresiva. Sin este fichero todo sigue funcionando: el índice enseña la foto del primer proyecto y el menú
   móvil se abre con un checkbox. Aquí solo se añade lo que un enlace no da.
 */
 (function () {
   'use strict';
-
-  // Visor de proyecto: flechas del teclado y deslizamiento en táctil.
-  var visor = document.querySelector('[data-visor]');
-  if (visor) {
-    var anterior = document.querySelector('[data-anterior]');
-    var siguiente = document.querySelector('[data-siguiente]');
-
-    document.addEventListener('keydown', function (e) {
-      if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
-      if (e.key === 'ArrowLeft' && anterior) window.location.href = anterior.href;
-      if (e.key === 'ArrowRight' && siguiente) window.location.href = siguiente.href;
-    });
-
-    var x0 = null;
-    var y0 = null;
-    visor.addEventListener('touchstart', function (e) {
-      x0 = e.touches[0].clientX;
-      y0 = e.touches[0].clientY;
-    }, { passive: true });
-    visor.addEventListener('touchend', function (e) {
-      if (x0 === null) return;
-      var dx = e.changedTouches[0].clientX - x0;
-      var dy = e.changedTouches[0].clientY - y0;
-      x0 = y0 = null;
-      // Solo un gesto claramente horizontal, para no romper el scroll vertical.
-      if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy) * 2) return;
-      var destino = dx < 0 ? siguiente : anterior;
-      if (destino) window.location.href = destino.href;
-    }, { passive: true });
-  }
 
   // Índice de proyectos: la foto de la derecha sigue a la fila señalada.
   // En táctil no cambia (no hay "señalar").

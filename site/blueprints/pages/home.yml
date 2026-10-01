@@ -12,7 +12,7 @@ fields:
     type: files
     max: 1
     layout: cards
-    query: site.find('proyectos').images
+    query: site.find('proyectos').index.images
     translate: false
     help: Ocupa el alto de la ventana, sin texto encima. Si la dejas vacía se usa la portada del proyecto destacado.
   destacado:

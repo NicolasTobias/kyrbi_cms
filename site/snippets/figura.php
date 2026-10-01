@@ -1,6 +1,6 @@
 <?php
 /*
-  Una fotografía con su srcset, su alt en español y su pie opcional.
+  Una fotografía con su srcset y su alt. Sin pie de foto.
 
   Se sirve WebP con respaldo JPEG vía <picture>. `width` y `height` son los
   del original: el navegador solo necesita la relación de aspecto para
@@ -12,13 +12,11 @@
     set        string 'foto' (columna, hasta 1500px) o 'hero' (apertura)
     sizes      string atributo sizes acorde a la retícula
     prioridad  bool   true solo en la foto de apertura de la home
-    pie        bool   pintar el pie de foto si lo tiene
 */
 
 $set       = $set ?? 'foto';
 $sizes     = $sizes ?? '(min-width: 1660px) 1500px, (min-width: 900px) calc(100vw - 8rem), 90vw';
 $prioridad = $prioridad ?? false;
-$pie       = $pie ?? true;
 
 /* Respaldo para navegadores sin srcset: el ancho intermedio. */
 $respaldo = $foto->thumb([
@@ -41,7 +39,4 @@ $respaldo = $foto->thumb([
       height="<?= $foto->height() ?>"
       <?php if ($prioridad): ?>fetchpriority="high" decoding="async"<?php else: ?>loading="lazy" decoding="async"<?php endif ?>>
   </picture>
-  <?php if ($pie && $foto->caption()->isNotEmpty()): ?>
-  <figcaption><?= $foto->caption()->esc() ?></figcaption>
-  <?php endif ?>
 </figure>

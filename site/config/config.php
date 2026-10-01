@@ -89,6 +89,18 @@ $rutas = [
         'pattern' => ['photography', 'photography/(:all)'],
         'action'  => fn () => go('proyectos', 301),
     ],
+    /*
+      El proyecto "madrid" pasa a "interurbano". Al renombrar el proyecto,
+      cambia solo este destino. En EN el slug de proyectos es "projects".
+    */
+    [
+        'pattern' => ['proyectos/madrid', 'proyectos/madrid/(:all)'],
+        'action'  => fn () => go('proyectos/interurbano', 301),
+    ],
+    [
+        'pattern' => ['en/projects/madrid', 'en/projects/madrid/(:all)', 'en/proyectos/madrid'],
+        'action'  => fn () => go('en/projects/interurbano', 301),
+    ],
     [
         'pattern' => ['about', 'about/(:all)', 'sobre', 'sobre/(:all)'],
         'action'  => fn () => go('quien-soy', 301),
